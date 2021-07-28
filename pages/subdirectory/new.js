@@ -18,15 +18,17 @@ function StyledSubComponent() {
   )
 }
 
-export default function SecondPage() {
+export default function SecondPage({ navigations }) {
   return (
     <Layout>
       <div className="container">
         <Head>
           <title>Next.js sketch, Page 2</title>
-          <link rel="icon" href="/favicon.ico" />
         </Head>
         <main>
+          <div>
+            Navigation counter: {navigations}
+          </div>
           <h1 className="title">
             Welcome to the second page
           </h1>

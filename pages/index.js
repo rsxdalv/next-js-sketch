@@ -1,14 +1,16 @@
 import Head from 'next/head'
 
-export default function Home() {
+export default function Home({ navigations }) {
   return (
     <div className="container">
       <Head>
         <title>Next.js sketch</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
+        <div>
+          Navigation counter: {navigations}
+        </div>
         <h1 className="title">
           Welcome to a sketch of <a href="https://nextjs.org">Next.js!</a>
         </h1>
