@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from 'next/head'
-import '../styles-2/global.css'
+import '../styles/global.css'
 
 export default function App({ Component, pageProps }) {
     const [navigations, setNavigations] = useState(0);
