@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 
 export default function StaticallyGenerated({ data, date }) {
@@ -16,7 +17,7 @@ export default function StaticallyGenerated({ data, date }) {
     )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async context => {
     // Get external data from the file system, API, DB, etc.
     const data = Math.PI;
 

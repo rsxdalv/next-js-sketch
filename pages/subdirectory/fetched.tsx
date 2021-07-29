@@ -1,6 +1,7 @@
 import Layout from '../../components/layout'
 import { getFetchedData } from '../../lib/getFetchedData'
 import { css } from '@emotion/css'
+import { GetServerSideProps } from 'next'
 
 export default function Home({ fetchedData }) {
     return (
@@ -28,7 +29,7 @@ export default function Home({ fetchedData }) {
     )
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async context => {
     const fetchedData = await getFetchedData()
     return {
         props: {
