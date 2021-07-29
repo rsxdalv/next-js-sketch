@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import Layout from '../../components-2/layout'
+import Layout from '../../components/layout'
 
 function StyledSubComponent() {
   return (
