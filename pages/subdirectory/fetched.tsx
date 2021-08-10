@@ -5,7 +5,7 @@ import { GetServerSideProps } from 'next'
 
 export default function Home({ fetchedData }) {
     return (
-        <Layout home>
+        <Layout>
             <section>
                 <h2>API Sample</h2>
                 <div>
