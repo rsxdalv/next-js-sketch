@@ -1,7 +1,7 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import cubejs from "@cubejs-client/core";
 import { QueryRenderer, QueryRendererRenderProps } from "@cubejs-client/react";
 import { Spin } from 'antd';
@@ -14,23 +14,30 @@ const cubejsApi = cubejs(
     { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
 );
 
-function Prev2({ data, CHART_ID }) {
+function DateLineChart({ data, CHART_ID }) {
     const chartRef = useRef(null);
 
     useEffect(() => {
         if (!chartRef.current) {
-            chartRef.current = am4core.create(CHART_ID, am4charts.XYChart);
-
-            chartRef.current.data = data;
 
             // Add X Axis
+            // let xAxis = chartRef.current.xAxes.push(new am4charts.DateAxis());
+
+            // chartRef.current = am4core.create(CHART_ID, am4charts.XYChart);
+            chartRef.current = am4core.createFromConfig({
+            }, CHART_ID, am4charts.XYChart);
+            chartRef.current.data = data;
+
+
             let xAxis = chartRef.current.xAxes.push(new am4charts.DateAxis());
+            // const xAxis = new am4charts.DateAxis();
             xAxis.dataFields.category = "LineItems.createdAt.month";
             xAxis.renderer.cellStartLocation = 0.1;
             xAxis.renderer.cellEndLocation = 0.9;
             xAxis.renderer.grid.template.strokeOpacity = 0;
             xAxis.renderer.labels.template.fill = am4core.color('#ced1e0');
             xAxis.renderer.labels.template.fontSize = 12;
+            // chartRef.current.xAxes.push(xAxis);
 
             // Add Y Axis
             let yAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
@@ -101,7 +108,7 @@ function Prev2({ data, CHART_ID }) {
         return () => {
             chartRef.current && chartRef.current.dispose();
         };
-    }, []);
+    }, [CHART_ID]);
 
     // Load data into chart
     useEffect(() => {
@@ -137,7 +144,7 @@ const renderChart = ({ resultSet, error }: QueryRendererRenderProps) => {
     }
 
     const data = resultSet.tablePivot();
-    const newData = data.map((row) => ({ 
+    const newData = data.map((row) => ({
         "LineItems.createdAt.month": new Date(row["LineItems.createdAt.week"] as string),
         // "LineItems.createdAt.month": moment(row["LineItems.createdAt.month"] as string).format('MMM'),
         ...row
@@ -147,7 +154,7 @@ const renderChart = ({ resultSet, error }: QueryRendererRenderProps) => {
     }))
     return (
         <div>
-            <Prev2 data={newData} CHART_ID={CHART_ID + Math.random()} />
+            <DateLineChart data={newData} CHART_ID={CHART_ID + Math.random()} />
         </div>
     );
 
