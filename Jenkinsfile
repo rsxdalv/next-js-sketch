@@ -4,7 +4,7 @@ pipeline {
         CI = 'true' 
     }
     stages {
-        stage('Test') {
+        stage('Finish') {
             steps {
                 sh 'node --version'
             }
