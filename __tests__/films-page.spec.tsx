@@ -13,7 +13,7 @@ test('displays the list of films', async () => {
   await waitFor(() => {
     mockedFilms.results.forEach(({ title, release_date, director }) => {
       expect(
-        screen.getByRole('heading2', { level: 2, name: title })
+        screen.getByRole('heading', { level: 2, name: title })
       ).toBeInTheDocument();
       expect(
         screen.getByText(`Release date: ${release_date}`)
